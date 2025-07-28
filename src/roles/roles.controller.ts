@@ -29,11 +29,7 @@ export class RolesController {
     return this.rolesService.getPermissions(ids);
   }
 
-  // @Get('permissions')
-  // getPermission(@Body('ids') ids: string[]) {
-  //   console.log("đã vào đây");
-  //   
-  // }
+
 
   @ResponseMessage("update role")
   @Patch(':id')

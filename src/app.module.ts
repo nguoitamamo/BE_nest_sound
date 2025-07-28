@@ -25,6 +25,9 @@ import { RolesModule } from './roles/roles.module';
 import { DatabasesModule } from './databases/databases.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { GroupsModule } from './groups/groups.module';
+import { ChatGateway } from './chats/chats.gateway';
+import { ChatsModule } from './chats/chats.module';
+import { MessagesModule } from './messages/messages.module';
 
 
 
@@ -63,9 +66,12 @@ import { GroupsModule } from './groups/groups.module';
     RolesModule,
     DatabasesModule,
     GroupsModule,
+    ChatsModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService,
+    ChatGateway,
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

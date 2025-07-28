@@ -9,7 +9,7 @@ export interface IUser {
     typeLogin: string;
     following: string[];
     followers: string[];
-    shared: string[]
+    shared: string[];
 
 }
 

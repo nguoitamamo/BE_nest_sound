@@ -9,10 +9,13 @@ import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { IUser } from './users.interface';
 import { RolesService } from 'src/roles/roles.service';
 import { Role, RoleDocument } from 'src/roles/schemas/role.schema';
+import { Room, UserSocket } from 'src/global/global.interface';
 
 
 @Injectable()
 export class UsersService {
+  
+
   constructor(
     @InjectModel(User.name) private userModel: SoftDeleteModel<UserDocument>,
 
@@ -20,6 +23,11 @@ export class UsersService {
     private roleModel: SoftDeleteModel<RoleDocument>,
 
   ) { }
+  // room
+
+
+  // room
+
 
   getHashPassword = (password: string) => {
     const salt = genSaltSync(10);
@@ -149,7 +157,7 @@ export class UsersService {
 
 
   async getAll() {
-    return this.userModel.find().select('_id name')
+    return this.userModel.find().select('_id name avatar email createdAt updatedAt')
   }
 
 }

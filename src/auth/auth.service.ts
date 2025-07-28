@@ -29,7 +29,7 @@ export class AuthService {
                 return user;
             }
         }
-        console.log('đã vào đây');
+     
         return null;
     }
 
@@ -45,8 +45,6 @@ export class AuthService {
             role,
             avatar,
             typeLogin: type ? type : typeLogin,
-            followers,
-            following
         };
 
         return {

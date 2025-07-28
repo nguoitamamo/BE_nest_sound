@@ -7,11 +7,11 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { TransformInterceptor } from './core/transform.interceptor';
 import { useContainer } from 'class-validator';
+import { IoAdapter } from '@nestjs/platform-socket.io';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
-
   const reflector = app.get(Reflector);
   app.useGlobalGuards(new JwtAuthGuard(reflector));
   app.useGlobalInterceptors(new TransformInterceptor(reflector));
@@ -30,7 +30,14 @@ async function bootstrap() {
   });
 
 
-  app.enableCors();
+
+  app.enableCors({
+    origin: ['http://localhost:4000'], // Cho phép FE
+    credentials: true,
+  });
+
+  app.useWebSocketAdapter(new IoAdapter(app));
+
   await app.listen(configService.get('PORT'));
 }
 bootstrap();

@@ -5,8 +5,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Public, ResponseMessage, User } from 'src/decorators/customiz';
 import { IUser } from './users.interface';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Cron, CronExpression } from '@nestjs/schedule';
-import { query } from 'express';
+import { Room } from 'src/global/global.interface';
+
 
 @Controller('users')
 export class UsersController {
@@ -72,6 +72,14 @@ export class UsersController {
     return this.usersService.remove(id);
   }
 
+
+  // @SubscribeMessage('events')
+  // handleEvent(@ConnectedSocket() client: Socket, @MessageBody() data: any): string {
+  //   console.log(client.data);
+  //   // logs the id of the client
+  //   const message: string = data.message;
+  //   return message;
+  // }
 
 
 
