@@ -11,11 +11,13 @@ import { Logger } from '@nestjs/common'
 
 import { Server, Socket } from 'socket.io'
 
-import { ClientToServerEvents, Message, MessageType, ReadAllMessagePayload, ServerToClientEvents, UserSocket } from 'src/global/global.interface'
+// import { ClientToServerEvents, Message, MessageType, ReadAllMessagePayload, ServerToClientEvents, UserSocket } from ''
 
-import { ChatsService } from './chats.service'
+
 
 import { Types } from 'mongoose'
+import { ChatsService } from './chats.service.js'
+import { ClientToServerEvents, MessageType, ServerToClientEvents } from '../global/global.interface.js'
 
 
 

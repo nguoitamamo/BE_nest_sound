@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePlaylistDto } from './dto/create-playlist.dto';
-import { UpdatePlaylistDto } from './dto/update-playlist.dto';
-import { IUser } from 'src/users/users.interface';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Playlist, PlaylistDocument } from './schemas/playlist.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import mongoose from 'mongoose';
+import { Playlist, PlaylistDocument } from './schemas/playlist.schema.js';
+import { CreatePlaylistDto } from './dto/create-playlist.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdatePlaylistDto } from './dto/update-playlist.dto.js';
 
 @Injectable()
 export class PlaylistsService {

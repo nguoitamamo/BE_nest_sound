@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AlbumsService } from './albums.service';
-import { AlbumsController } from './albums.controller';
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { Album, AlbumSchema } from './schema/album.schema';
+import { Album, AlbumSchema } from './schema/album.schema.js';
+import { AlbumsController } from './albums.controller.js';
+import { AlbumsService } from './albums.service.js';
+
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Album.name, schema: AlbumSchema }])],

@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument, Types } from "mongoose";
-import { User } from "src/users/schemas/user.schema";
 
 
 
@@ -19,10 +18,10 @@ export class Group {
     avatar: string;
 
 
-    @Prop({ type: Types.ObjectId, ref: User.name, required: true })
+    @Prop({ type: Types.ObjectId, ref: 'User', required: true })
     adminGroup: Types.ObjectId;
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: User.name, required: true }] })
+    @Prop({ type: [{ type: Types.ObjectId, ref: 'User', required: true }] })
     members: Types.ObjectId[];
 
     @Prop({ default: 5 })
@@ -64,3 +63,4 @@ export class Group {
 
 }
 export const GroupSchema = SchemaFactory.createForClass(Group);
+export const GroupModel = mongoose.model('Group', GroupSchema);

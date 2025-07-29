@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './schemas/user.schema';
-import { RolesService } from 'src/roles/roles.service';
-import { RelationQueryBuilder } from 'typeorm';
-import { Role, RoleSchema } from 'src/roles/schemas/role.schema';
+import { User, UserSchema } from './schemas/user.schema.js';
+import { Role, RoleSchema } from '../roles/schemas/role.schema.js';
+import { UsersController } from './users.controller.js';
+import { UsersService } from './users.service.js';
+import { RolesService } from '../roles/roles.service.js';
+
 
 
 

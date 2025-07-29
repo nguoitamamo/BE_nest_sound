@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { MessagesService } from './messages.service';
-import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
-import { ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { MessagesService } from './messages.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateMessageDto } from './dto/create-message.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateMessageDto } from './dto/update-message.dto.js';
+
 
 
 @Controller('messages')

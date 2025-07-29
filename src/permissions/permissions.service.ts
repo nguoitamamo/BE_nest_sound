@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePermissionDto } from './dto/create-permission.dto';
-import { UpdatePermissionDto } from './dto/update-permission.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Permission, PermissionDocument } from './schemas/permission.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from 'src/users/users.interface';
+import { Permission, PermissionDocument } from './schemas/permission.schema.js';
+import { CreatePermissionDto } from './dto/create-permission.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdatePermissionDto } from './dto/update-permission.dto.js';
+
 
 @Injectable()
 export class PermissionsService {

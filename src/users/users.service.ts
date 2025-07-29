@@ -1,15 +1,24 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './schemas/user.schema';
+
 import mongoose, { Model } from 'mongoose';
-import { genSaltSync, hashSync, compareSync } from "bcryptjs";
+// import { genSaltSync, hashSync, compareSync } from "bcryptjs";
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from './users.interface';
-import { RolesService } from 'src/roles/roles.service';
-import { Role, RoleDocument } from 'src/roles/schemas/role.schema';
-import { Room, UserSocket } from 'src/global/global.interface';
+
+// const { genSaltSync, hashSync, compareSync } = pkg;
+
+
+import { IUser } from './users.interface.js';
+import { Role, RoleDocument } from '../roles/schemas/role.schema.js';
+import { User, UserDocument } from './schemas/user.schema.js';
+import { CreateUserDto } from './dto/create-user.dto.js';
+import { UpdateUserDto } from './dto/update-user.dto.js';
+
+
+
+import pkg from 'bcryptjs';
+const { genSaltSync, hashSync, compareSync } = pkg;
 
 
 @Injectable()

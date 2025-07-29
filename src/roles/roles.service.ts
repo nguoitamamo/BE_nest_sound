@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Role, RoleDocument } from './schemas/role.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from 'src/users/users.interface';
+
 import mongoose from 'mongoose';
+import { Role, RoleDocument } from './schemas/role.schema.js';
+import { CreateRoleDto } from './dto/create-role.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateRoleDto } from './dto/update-role.dto.js';
 
 @Injectable()
 export class RolesService {

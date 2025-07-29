@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import mongoose, { HydratedDocument, Types } from 'mongoose';
-import { UserClass } from 'src/users/user.class.ts/user.class';
-import { StateEnum } from '../state.enumts/state.enum';
-import { ISong } from '../song.interface.ts/song.interface';
+import { StateEnum } from '../state.enumts/state.enum.js';
+
 
 
 
@@ -91,3 +90,4 @@ export class Song {
 }
 
 export const SongSchema = SchemaFactory.createForClass(Song);
+export const SongModel = mongoose.model('Song', SongSchema);

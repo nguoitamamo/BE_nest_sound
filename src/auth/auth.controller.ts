@@ -1,9 +1,9 @@
 import { Controller, Get, Render, UseGuards, Post, Request, Body } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { Public, ResponseMessage } from 'src/decorators/customiz';
-import { LocalAuthGuard } from './local-auth.guard';
-import { IBody } from 'src/global/global.interface';
-import { IUser } from 'src/users/users.interface';
+import { AuthService } from './auth.service.js';
+import { Public, ResponseMessage } from '../decorators/customiz.js';
+import { LocalAuthGuard } from './local-auth.guard.js';
+import { IBody } from '../global/global.interface.js';
+import { IUser } from '../users/users.interface.js';
 
 
 @Controller('auth')

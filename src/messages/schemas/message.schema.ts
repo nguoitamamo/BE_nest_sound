@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument, Types } from "mongoose";
-import { Chat } from "src/chats/schemas/chat.schema";
-import { User } from "src/users/schemas/user.schema";
+
+
 
 
 export type MessageDocument = HydratedDocument<Message>;
@@ -24,7 +24,7 @@ export class Message {
 
     @Prop({
         type: mongoose.Schema.Types.ObjectId,
-        ref: User.name,
+        ref: 'User',
         required: true,
     })
     sender: Types.ObjectId
@@ -43,7 +43,7 @@ export class Message {
 
     @Prop({
         type: [mongoose.Schema.Types.ObjectId],
-        ref: User.name,
+        ref: 'User',
         default: [],
     })
     readBy: Types.ObjectId
@@ -63,3 +63,4 @@ export class Message {
 
 }
 export const MessageSchema = SchemaFactory.createForClass(Message);
+export const MessageModel = mongoose.model('Message', MessageSchema);

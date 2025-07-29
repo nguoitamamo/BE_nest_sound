@@ -1,8 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { GenresService } from './genres.service';
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
-import { Public } from 'src/decorators/customiz';
+import { GenresService } from './genres.service.js';
+import { Public } from '../decorators/customiz.js';
+import { CreateGenreDto } from './dto/create-genre.dto.js';
+import { UpdateGenreDto } from './dto/update-genre.dto.js';
+
 
 @Controller('genres')
 export class GenresController {

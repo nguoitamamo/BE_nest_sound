@@ -1,9 +1,8 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsBoolean, IsEnum, IsNotEmpty, IsOptional, IsString, Validate, ValidateNested, Validator } from 'class-validator';
-import { CreateGenreDto } from 'src/genres/dto/create-genre.dto';
-import { UserDto } from 'src/users/dto/user.dto';
-import { IsUniqueConstraint } from 'src/validator/is.unique.constraint';
-import { StateEnum } from '../state.enumts/state.enum';
+import { IsUniqueConstraint } from '../../validator/is.unique.constraint.js';
+import { StateEnum } from '../state.enumts/state.enum.js';
+
 
 export class CreateSongDto {
 

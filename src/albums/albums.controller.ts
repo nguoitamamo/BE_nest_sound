@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { AlbumsService } from './albums.service';
-import { CreateAlbumDto } from './dto/create-album.dto';
-import { UpdateAlbumDto } from './dto/update-album.dto';
-import { User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AlbumsService } from './albums.service.js';
+import { User } from '../decorators/customiz.js';
+import { CreateAlbumDto } from './dto/create-album.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateAlbumDto } from './dto/update-album.dto.js';
 
 @Controller('albums')
 export class AlbumsController {

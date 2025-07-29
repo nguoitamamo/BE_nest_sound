@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { RolesService } from './roles.service';
-import { CreateRoleDto } from './dto/create-role.dto';
-import { UpdateRoleDto } from './dto/update-role.dto';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { RolesService } from './roles.service.js';
+import { Public, ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateRoleDto } from './dto/create-role.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateRoleDto } from './dto/update-role.dto.js';
+
 
 @Controller('roles')
 export class RolesController {

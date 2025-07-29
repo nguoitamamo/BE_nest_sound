@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { LikesService } from './likes.service';
-import { CreateLikeDto } from './dto/create-like.dto';
-import { UpdateLikeDto } from './dto/update-like.dto';
-import { IUser } from 'src/users/users.interface';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
+import { LikesService } from './likes.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateLikeDto } from './dto/create-like.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateLikeDto } from './dto/update-like.dto.js';
+
 
 @Controller('likes')
 export class LikesController {

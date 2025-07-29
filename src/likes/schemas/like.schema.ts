@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import { HydratedDocument } from "mongoose";
-import { UserClass } from "src/users/user.class.ts/user.class";
+import mongoose, { HydratedDocument } from "mongoose";
+import { UserClass } from "../../users/user.class.ts/user.class.js";
+
 
 
 export type LikeDocument = HydratedDocument<Like>;
@@ -21,3 +22,4 @@ export class Like {
 
 
 export const LikeSchema = SchemaFactory.createForClass(Like);
+export const LikeModel = mongoose.model('Like', LikeSchema);

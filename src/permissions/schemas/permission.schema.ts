@@ -46,3 +46,4 @@ export class Permission {
 }
 
 export const PermissionSchema = SchemaFactory.createForClass(Permission);
+export const PermissionModel = mongoose.model('Permission', PermissionSchema);

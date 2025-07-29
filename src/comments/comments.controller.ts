@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CommentsService } from './comments.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { CommentsService } from './comments.service.js';
+import { Public, ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateCommentDto } from './dto/create-comment.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateCommentDto } from './dto/update-comment.dto.js';
+
 
 @Controller('comments')
 export class CommentsController {

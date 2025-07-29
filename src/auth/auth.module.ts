@@ -1,15 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { UsersModule } from 'src/users/users.module';
+
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './passport/local.strategy';
+
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { JwtStrategy } from './jwt.strategy';
+
 import ms from 'ms';
-import { AuthController } from './auth.controller';
-import { RolesService } from 'src/roles/roles.service';
-import { RolesModule } from 'src/roles/roles.module';
+import { UsersModule } from '../users/users.module.js';
+import { RolesModule } from '../roles/roles.module.js';
+import { AuthController } from './auth.controller.js';
+import { AuthService } from './auth.service.js';
+import { LocalStrategy } from './passport/local.strategy.js';
+import { JwtStrategy } from './jwt.strategy.js';
+
 
 @Module({
   imports: [UsersModule, PassportModule,

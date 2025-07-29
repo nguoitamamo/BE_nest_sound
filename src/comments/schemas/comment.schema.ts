@@ -1,7 +1,8 @@
 
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import { HydratedDocument } from "mongoose";
-import { UserClass } from "src/users/user.class.ts/user.class";
+import mongoose, { HydratedDocument } from "mongoose";
+import { UserClass } from "../../users/user.class.ts/user.class.js";
+
 
 
 export type CommentDocument = HydratedDocument<Comment>;
@@ -41,3 +42,4 @@ export class Comment {
 
 
 export const CommentSchema = SchemaFactory.createForClass(Comment);
+export const CommentModel = mongoose.model('Comment', CommentSchema);

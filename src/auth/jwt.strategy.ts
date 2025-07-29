@@ -3,8 +3,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { IUser } from 'src/users/users.interface';
-import { RolesService } from 'src/roles/roles.service';
+import { RolesService } from '../roles/roles.service.js';
+import { IUser } from '../users/users.interface.js';
+
 
 
 @Injectable()

@@ -1,34 +1,46 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+
 import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './auth/jwt-auth.guard';
+
 import { softDeletePlugin } from 'soft-delete-plugin-mongoose';
-import { CompaniesModule } from './companies/companies.module';
-import { SongsModule } from './songs/songs.module';
-import { GenresModule } from './genres/genres.module';
 
-import { IsUniqueConstraint } from './validator/is.unique.constraint';
-import { EntityManager } from 'typeorm';
-import { AlbumsModule } from './albums/albums.module';
-import { LikesModule } from './likes/likes.module';
-import { HistorysModule } from './historys/historys.module';
-import { PlaylistsModule } from './playlists/playlists.module';
-import { FilesModule } from './files/files.module';
-import { CommentsModule } from './comments/comments.module';
-import { PermissionsModule } from './permissions/permissions.module';
-import { RolesModule } from './roles/roles.module';
-import { DatabasesModule } from './databases/databases.module';
+import { AppController } from './app.controller.js';
+import { AdminModule } from '@adminjs/nestjs';
+
+import AdminJS from 'adminjs';
+import * as AdminJSMongoose from '@adminjs/mongoose';
+import provider from './admin/auth-provider.js';
+import options from './admin/options.js';
 import { ScheduleModule } from '@nestjs/schedule';
-import { GroupsModule } from './groups/groups.module';
-import { ChatGateway } from './chats/chats.gateway';
-import { ChatsModule } from './chats/chats.module';
-import { MessagesModule } from './messages/messages.module';
+import { UsersModule } from './users/users.module.js';
+import { AuthModule } from './auth/auth.module.js';
+import { CompaniesModule } from './companies/companies.module.js';
+import { SongsModule } from './songs/songs.module.js';
+import { GenresModule } from './genres/genres.module.js';
+import { AlbumsModule } from './albums/albums.module.js';
+import { LikesModule } from './likes/likes.module.js';
+import { HistorysModule } from './historys/historys.module.js';
+import { PlaylistsModule } from './playlists/playlists.module.js';
+import { FilesModule } from './files/files.module.js';
+import { CommentsModule } from './comments/comments.module.js';
+import { PermissionsModule } from './permissions/permissions.module.js';
+import { RolesModule } from './roles/roles.module.js';
+import { DatabasesModule } from './databases/databases.module.js';
+import { GroupsModule } from './groups/groups.module.js';
+import { ChatsModule } from './chats/chats.module.js';
+import { MessagesModule } from './messages/messages.module.js';
+import { AppService } from './app.service.js';
+import { ChatGateway } from './chats/chats.gateway.js';
+import { JwtAuthGuard } from './auth/jwt-auth.guard.js';
+import { IsUniqueConstraint } from './validator/is.unique.constraint.js';
 
+AdminJS.registerAdapter({
+  Resource: AdminJSMongoose.Resource,
+  Database: AdminJSMongoose.Database,
+});
 
 
 
@@ -38,10 +50,10 @@ import { MessagesModule } from './messages/messages.module';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URI'),
-        connectionFactory: (connection) => {
-          connection.plugin(softDeletePlugin);
-          return connection;
-        }
+         connectionFactory:  (connection) => {
+           connection.plugin(softDeletePlugin);
+          return  connection;
+        } 
 
       }),
       inject: [ConfigService],
@@ -68,6 +80,27 @@ import { MessagesModule } from './messages/messages.module';
     GroupsModule,
     ChatsModule,
     MessagesModule,
+
+    AdminModule.createAdminAsync({
+      useFactory: async () => {
+        return await {
+          adminJsOptions: options,
+          auth: {
+            provider,
+            cookiePassword: process.env.COOKIE_SECRET,
+            cookieName: 'adminjs',
+          },
+          sessionOptions: {
+            resave: true,
+            saveUninitialized: true,
+            secret: process.env.COOKIE_SECRET,
+          },
+        };
+      },
+    }),
+
+
+
   ],
   controllers: [AppController],
   providers: [AppService,

@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
-import { PlaylistsService } from './playlists.service';
-import { PlaylistsController } from './playlists.controller';
+
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { Playlist, PlaylistSchema } from './schemas/playlist.schema';
+import { Playlist, PlaylistSchema } from './schemas/playlist.schema.js';
+import { PlaylistsController } from './playlists.controller.js';
+import { PlaylistsService } from './playlists.service.js';
+
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Playlist.name, schema: PlaylistSchema }])],

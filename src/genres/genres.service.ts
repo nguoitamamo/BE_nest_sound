@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
-import { Genre, GenreDocument } from './schemas/genre.schema';
+
 import { InjectModel } from '@nestjs/mongoose';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
+import { Genre, GenreDocument } from './schemas/genre.schema.js';
+import { CreateGenreDto } from './dto/create-genre.dto.js';
+import { UpdateGenreDto } from './dto/update-genre.dto.js';
 
 @Injectable()
 export class GenresService {

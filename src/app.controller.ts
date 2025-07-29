@@ -1,7 +1,7 @@
 import { Controller, Get, Render, UseGuards, Post, Request, UploadedFile, UseInterceptors, ParseFilePipeBuilder, HttpStatus } from '@nestjs/common';
-import { AuthService } from './auth/auth.service';
+
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Public } from './decorators/customiz';
+import { AuthService } from './auth/auth.service.js';
 
 @Controller()
 export class AppController {

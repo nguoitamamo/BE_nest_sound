@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument, Types } from "mongoose";
 
-import { Message } from "src/messages/schemas/message.schema";
-import { User } from "src/users/schemas/user.schema";
+
 
 
 
@@ -13,13 +12,13 @@ export type ChatDocument = HydratedDocument<Chat>;
 @Schema({ timestamps: true })
 export class Chat {
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: User.name, required: true }] })
+    @Prop({ type: [{ type: Types.ObjectId, ref: 'User', required: true }] })
     users: Types.ObjectId[];
 
     @Prop([
         {
-            userID: { type: Types.ObjectId, ref: User.name, required: true },
-            messageID: { type: Types.ObjectId, ref: Message.name, required: true },
+            userID: { type: Types.ObjectId, ref: 'User', required: true },
+            messageID: { type: Types.ObjectId, ref: 'Message', required: true },
         },
     ])
     unreadCounts: {
@@ -30,11 +29,11 @@ export class Chat {
     @Prop({ default: '' })
     lastMessageAt: string;
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Message.name })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Message' })
     lastMessage: Types.ObjectId;
 
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
     createdBy: Types.ObjectId;
 
     @Prop({
@@ -63,7 +62,7 @@ export class Chat {
 
     @Prop({
         type: [mongoose.Schema.Types.ObjectId],
-        ref: User.name
+        ref: 'User'
     })
     groupAdmins: Types.ObjectId[]
 
@@ -83,4 +82,4 @@ export class Chat {
 
 }
 export const ChatSchema = SchemaFactory.createForClass(Chat);
-
+export const ChatModel = mongoose.model('Chat', ChatSchema);

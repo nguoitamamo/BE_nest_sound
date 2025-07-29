@@ -41,3 +41,4 @@ export class Album {
 
 }
 export const AlbumSchema = SchemaFactory.createForClass(Album);
+export const AlbumModel = mongoose.model('Album', AlbumSchema);

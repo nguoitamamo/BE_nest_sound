@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
 import mongoose, { HydratedDocument, Types } from "mongoose"
-import { Permission } from "src/permissions/schemas/permission.schema";
+import { Permission } from "../../permissions/schemas/permission.schema.js";
+
 
 export type RoleDocument = HydratedDocument<Role>;
 
@@ -48,3 +49,4 @@ export class Role {
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);
+export const RoleModel = mongoose.model('Role', RoleSchema);

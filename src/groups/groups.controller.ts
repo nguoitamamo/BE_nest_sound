@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { GroupsService } from './groups.service';
-import { CreateGroupDto } from './dto/create-group.dto';
-import { UpdateGroupDto } from './dto/update-group.dto';
-import { ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { GroupsService } from './groups.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateGroupDto } from './dto/create-group.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateGroupDto } from './dto/update-group.dto.js';
+
 
 @Controller('groups')
 export class GroupsController {

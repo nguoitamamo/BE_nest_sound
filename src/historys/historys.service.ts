@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateHistoryDto } from './dto/create-history.dto';
-import { UpdateHistoryDto } from './dto/update-history.dto';
-import { IUser } from 'src/users/users.interface';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { History, HistoryDocument } from './schemas/history.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 
 import { Types } from 'mongoose';
+import { History, HistoryDocument } from './schemas/history.schema.js';
+import { IUser } from '../users/users.interface.js';
+import { CreateHistoryDto } from './dto/create-history.dto.js';
+import { UpdateHistoryDto } from './dto/update-history.dto.js';
 
 @Injectable()
 export class HistorysService {

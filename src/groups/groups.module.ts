@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { GroupsService } from './groups.service';
-import { GroupsController } from './groups.controller';
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { Group, GroupSchema } from './schemas/group.schema';
-import { RolesModule } from 'src/roles/roles.module';
-import { UsersService } from 'src/users/users.service';
-import { SongsService } from 'src/songs/songs.service';
-import { UsersModule } from 'src/users/users.module';
-import { SongsModule } from 'src/songs/songs.module';
-import { User, UserSchema } from 'src/users/schemas/user.schema';
-import { Song, SongSchema } from 'src/songs/schemas/song.schema';
+import { Group, GroupSchema } from './schemas/group.schema.js';
+import { User } from '../decorators/customiz.js';
+import { Song, SongSchema } from '../songs/schemas/song.schema.js';
+import { UsersModule } from '../users/users.module.js';
+import { SongsModule } from '../songs/songs.module.js';
+import { GroupsController } from './groups.controller.js';
+import { GroupsService } from './groups.service.js';
+import { UserSchema } from '../users/schemas/user.schema.js';
+
 
 @Module({
   imports: [MongooseModule.forFeature([

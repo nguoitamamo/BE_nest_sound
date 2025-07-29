@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, Types } from 'mongoose';
-import { UserClass } from '../user.class.ts/user.class';
-import { Song } from 'src/songs/schemas/song.schema';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -19,8 +17,6 @@ export class User {
   @Prop()
   password: string;
 
-  @Prop()
-  sex: string;
 
   @Prop()
   avatar: string;
@@ -35,7 +31,7 @@ export class User {
   role: Types.ObjectId[];
 
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: Song.name }] })
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Song' }] })
   shared: Types.ObjectId[]
 
   @Prop()
@@ -77,3 +73,4 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+export const UserModel = mongoose.model('User', UserSchema);

@@ -4,10 +4,10 @@ import {
     ValidationArguments,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
-import { SongsService } from 'src/songs/songs.service';
-import { Column } from 'typeorm';
-import { share } from 'rxjs';
+
+
+import { UsersService } from '../users/users.service.js';
+import { SongsService } from '../songs/songs.service.js';
 
 
 // @ValidatorConstraint({ name: 'IsUnique', async: true })

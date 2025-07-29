@@ -1,12 +1,15 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Message, MessageDocument } from './schemas/message.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from 'src/users/users.interface';
-import { Chat, ChatDocument } from 'src/chats/schemas/chat.schema';
+
 import { Types } from 'mongoose';
+import { Message, MessageDocument } from './schemas/message.schema.js';
+import { Chat, ChatDocument } from '../chats/schemas/chat.schema.js';
+import { IUser } from '../users/users.interface.js';
+import { CreateMessageDto } from './dto/create-message.dto.js';
+import { UpdateMessageDto } from './dto/update-message.dto.js';
 
 @Injectable()
 export class MessagesService {

@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { CommentDocument, Comment } from './schemas/comment.schema';
-import { IUser } from 'src/users/users.interface';
+import { Comment, CommentDocument } from './schemas/comment.schema.js';
+import { CreateCommentDto } from './dto/create-comment.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateCommentDto } from './dto/update-comment.dto.js';
+
 
 
 @Injectable()

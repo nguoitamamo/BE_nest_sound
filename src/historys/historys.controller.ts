@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { HistorysService } from './historys.service';
-import { CreateHistoryDto } from './dto/create-history.dto';
-import { UpdateHistoryDto } from './dto/update-history.dto';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { HistorysService } from './historys.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateHistoryDto } from './dto/create-history.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateHistoryDto } from './dto/update-history.dto.js';
+
 
 @Controller('historys')
 export class HistorysController {

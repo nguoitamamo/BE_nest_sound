@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { DatabasesService } from './databases.service';
-import { DatabasesController } from './databases.controller';
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from 'src/users/schemas/user.schema';
-import { Permission, PermissionSchema } from 'src/permissions/schemas/permission.schema';
-import { Role, RoleSchema } from 'src/roles/schemas/role.schema';
-import { UsersService } from 'src/users/users.service';
+import { DatabasesController } from './databases.controller.js';
+import { DatabasesService } from './databases.service.js';
+import { UsersService } from '../users/users.service.js';
+import { User, UserSchema } from '../users/schemas/user.schema.js';
+import { Permission, PermissionSchema } from '../permissions/schemas/permission.schema.js';
+import { Role, RoleSchema } from '../roles/schemas/role.schema.js';
 
 @Module({
   controllers: [DatabasesController],

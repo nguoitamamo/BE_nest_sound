@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { HistorysService } from './historys.service';
-import { HistorysController } from './historys.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { History, HistorySchema } from './schemas/history.schema';
+import { HistorysController } from './historys.controller.js';
+import { HistorysService } from './historys.service.js';
+import { History, HistorySchema } from './schemas/history.schema.js';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: History.name, schema: HistorySchema }])],

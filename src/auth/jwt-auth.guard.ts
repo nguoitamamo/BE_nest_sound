@@ -7,8 +7,9 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
-import { IS_PUBLIC_KEY } from 'src/decorators/customiz';
+
 import { Request } from 'express';
+import { IS_PUBLIC_KEY } from '../decorators/customiz.js';
 
 
 @Injectable()

@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { CompaniesService } from './companies.service';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
-import { ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { CompaniesService } from './companies.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateCompanyDto } from './dto/create-company.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateCompanyDto } from './dto/update-company.dto.js';
+
 
 @Controller('companies')
 export class CompaniesController {

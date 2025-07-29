@@ -1,11 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
-import { IUser } from 'src/users/users.interface';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Chat, ChatDocument } from './schemas/chat.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { Types } from 'mongoose';
+import { Chat, ChatDocument } from './schemas/chat.schema.js';
+import { CreateChatDto } from './dto/create-chat.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateChatDto } from './dto/update-chat.dto.js';
 
 @Injectable()
 export class ChatsService {
@@ -14,7 +16,7 @@ export class ChatsService {
     @InjectModel(Chat.name) private chatModel: SoftDeleteModel<ChatDocument>,
   ) { }
 
-  async create(createChatDto: CreateChatDto, user: IUser) {
+  async create(createChatDto: CreateChatDto , user: IUser) {
     const { users, isGroupChat } = createChatDto;
 
 

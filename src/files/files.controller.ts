@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipeBuilder, HttpStatus } from '@nestjs/common';
-import { FilesService } from './files.service';
-import { Public, ResponseMessage } from 'src/decorators/customiz';
+
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesService } from './files.service.js';
+import { ResponseMessage } from '../decorators/customiz.js';
 
 
 @Controller('files')

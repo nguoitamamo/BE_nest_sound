@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLikeDto } from './dto/create-like.dto';
-import { UpdateLikeDto } from './dto/update-like.dto';
-import { IUser } from 'src/users/users.interface';
+
 
 import { InjectModel } from '@nestjs/mongoose';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { Like, LikeDocument } from './schemas/like.schema';
+import { Like, LikeDocument } from './schemas/like.schema.js';
+
+import { CreateLikeDto } from './dto/create-like.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateLikeDto } from './dto/update-like.dto.js';
+
 
 @Injectable()
 export class LikesService {

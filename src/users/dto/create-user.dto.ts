@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, Validate } from 'class-validator';
+import { IsUniqueConstraint } from '../../validator/is.unique.constraint.js';
 
-import { IsUniqueConstraint } from 'src/validator/is.unique.constraint';
+
 
 
 

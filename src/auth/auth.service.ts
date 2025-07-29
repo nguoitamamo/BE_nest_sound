@@ -1,7 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+
 import { JwtService } from '@nestjs/jwt';
-import { IUser } from 'src/users/users.interface';
+import { IUser } from '../users/users.interface.js';
+import { UsersService } from '../users/users.service.js';
+
 
 
 

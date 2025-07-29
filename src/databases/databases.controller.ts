@@ -1,5 +1,6 @@
 import { Controller } from '@nestjs/common';
-import { DatabasesService } from './databases.service';
+import { DatabasesService } from './databases.service.js';
+
 
 @Controller('databases')
 export class DatabasesController {

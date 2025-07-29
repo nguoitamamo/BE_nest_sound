@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
-import { ChatsService } from './chats.service';
-import { CreateChatDto } from './dto/create-chat.dto';
-import { UpdateChatDto } from './dto/update-chat.dto';
-import { ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from 'src/users/users.interface';
+import { ChatsService } from './chats.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateChatDto } from './dto/create-chat.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateChatDto } from './dto/update-chat.dto.js';
 
 @Controller('chats')
 export class ChatsController {

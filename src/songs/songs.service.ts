@@ -1,18 +1,17 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateSongDto } from './dto/create-song.dto';
-import { UpdateSongDto } from './dto/update-song.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Song, SongDocument } from './schemas/song.schema';
-import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { UsersService } from 'src/users/users.service';
-import { GenresService } from 'src/genres/genres.service';
 
-import { IUser } from 'src/users/users.interface';
 import { Types } from 'mongoose';
 import path from 'path';
 import { spawn } from 'child_process';
 
 import { startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
+import { InjectModel } from '@nestjs/mongoose';
+import { Song, SongDocument } from './schemas/song.schema.js';
+import { UsersService } from '../users/users.service.js';
+import { GenresService } from '../genres/genres.service.js';
+import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
+import { CreateSongDto } from './dto/create-song.dto.js';
+import { IUser } from '../users/users.interface.js';
 
 
 @Injectable()
@@ -76,21 +75,20 @@ export class SongsService {
 
 
   async UpdateView(user: IUser, id: string) {
+    const song = await this.songModel.findById(id);
 
-
-    const song = await this.songModel.findByIdAndUpdate(
-      id,
-      {
-        $addToSet: {
-          totalListen: {
-            _id: user._id,
-            date: new Date()
-          }
-        },
-
-      },
-      { new: true }
+    const alreadyListened = song.totalListen.some(
+      (entry) => entry._id.toString() === user._id.toString()
     );
+
+    if (!alreadyListened) {
+      song.totalListen.push({
+        _id: new Types.ObjectId(user._id),
+        date: new Date(),
+      });
+      await song.save();
+    }
+
     return song?.totalListen;
   }
 

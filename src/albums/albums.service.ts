@@ -1,10 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateAlbumDto } from './dto/create-album.dto';
-import { UpdateAlbumDto } from './dto/update-album.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Album, AlbumDocument } from './schema/album.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from 'src/users/users.interface';
+import { Album, AlbumDocument } from './schema/album.schema.js';
+import { IUser } from '../users/users.interface.js';
+import { CreateAlbumDto } from './dto/create-album.dto.js';
+import { UpdateAlbumDto } from './dto/update-album.dto.js';
+
 
 
 @Injectable()

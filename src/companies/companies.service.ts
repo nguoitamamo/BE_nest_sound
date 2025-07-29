@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { Company, CompanyDocument } from './schemas/company.schema';
+
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
-import { IUser } from 'src/users/users.interface';
+
 import mongoose from 'mongoose';
 import aqp from 'api-query-params';
+import { Company, CompanyDocument } from './schemas/company.schema.js';
+import { CreateCompanyDto } from './dto/create-company.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdateCompanyDto } from './dto/update-company.dto.js';
 
 @Injectable()
 export class CompaniesService {

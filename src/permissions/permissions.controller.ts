@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PermissionsService } from './permissions.service';
-import { CreatePermissionDto } from './dto/create-permission.dto';
-import { UpdatePermissionDto } from './dto/update-permission.dto';
-import { IUser } from 'src/users/users.interface';
-import { ResponseMessage, User } from 'src/decorators/customiz';
+import { PermissionsService } from './permissions.service.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { CreatePermissionDto } from './dto/create-permission.dto.js';
+import { IUser } from '../users/users.interface.js';
+import { UpdatePermissionDto } from './dto/update-permission.dto.js';
+
 
 @Controller('permissions')
 export class PermissionsController {

@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { SongsService } from './songs.service';
-import { SongsController } from './songs.controller';
+
 import { MongooseModule } from '@nestjs/mongoose';
-import { Song, SongSchema } from './schemas/song.schema';
-import { UsersModule } from 'src/users/users.module';
-import { GenresModule } from 'src/genres/genres.module';
+import { Song, SongSchema } from './schemas/song.schema.js';
+import { UsersModule } from '../users/users.module.js';
+import { GenresModule } from '../genres/genres.module.js';
+import { SongsController } from './songs.controller.js';
+import { SongsService } from './songs.service.js';
 
 
 

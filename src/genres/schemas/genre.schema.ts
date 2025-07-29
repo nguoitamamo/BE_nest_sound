@@ -44,3 +44,4 @@ export class Genre {
 }
 
 export const GenreSchema = SchemaFactory.createForClass(Genre);
+export const GenreModel = mongoose.model('Genre', GenreSchema);

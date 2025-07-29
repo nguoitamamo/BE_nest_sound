@@ -1,11 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, UploadedFiles, Query } from '@nestjs/common';
-import { SongsService } from './songs.service';
-import { CreateSongDto } from './dto/create-song.dto';
-import { UpdateSongDto } from './dto/update-song.dto';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
+
 import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
-import { IUser } from 'src/users/users.interface';
+
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { SongsService } from './songs.service.js';
+import { Public, ResponseMessage, User } from '../decorators/customiz.js';
+import { IUser } from '../users/users.interface.js';
+import { CreateSongDto } from './dto/create-song.dto.js';
 
 @Controller('songs')
 export class SongsController {
@@ -31,7 +32,7 @@ export class SongsController {
 
 
 
-  @Patch(':id') // id của bài hát
+  @Patch('updateview/:id') // id của bài hát
   @ResponseMessage('update view')
   updateView(@User() user: IUser, @Param('id') id: string) {
     return this.songsService.UpdateView(user, id);
@@ -80,14 +81,14 @@ export class SongsController {
 
   @Public()
   @ResponseMessage("get all like")
-  @Get('like/:songId')
+  @Get('getlike/:songId')
   async handleGetAllLike(@Param('songId') songId: string) {
     return this.songsService.getAllUserLike(songId);
   }
 
   @Public()
   @ResponseMessage("get all dislike")
-  @Get('dislike/:songId')
+  @Get('getdislike/:songId')
   async handleGetAllDisLike(@Param('songId') songId: string) {
     return this.songsService.getAllUserDisLike(songId);
   }

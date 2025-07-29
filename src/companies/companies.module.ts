@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CompaniesService } from './companies.service';
-import { CompaniesController } from './companies.controller';
+import { CompaniesService } from './companies.service.js';
+import { CompaniesController } from './companies.controller.js';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Company, CompanySchema } from './schemas/company.schema';
+import { Company, CompanySchema } from './schemas/company.schema.js';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Company.name, schema: CompanySchema }])],

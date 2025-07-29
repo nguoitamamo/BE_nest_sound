@@ -1,11 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { Public, ResponseMessage, User } from 'src/decorators/customiz';
-import { IUser } from './users.interface';
+
+
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Room } from 'src/global/global.interface';
+import { UsersService } from './users.service.js';
+import { Public, ResponseMessage, User } from '../decorators/customiz.js';
+import { CreateUserDto } from './dto/create-user.dto.js';
+import { IUser } from './users.interface.js';
+import { UpdateUserDto } from './dto/update-user.dto.js';
+
 
 
 @Controller('users')
