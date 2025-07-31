@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { MongooseModule } from '@nestjs/mongoose';
 import { Group, GroupSchema } from './schemas/group.schema.js';
-import { User } from '../decorators/customiz.js';
+
 import { Song, SongSchema } from '../songs/schemas/song.schema.js';
 import { UsersModule } from '../users/users.module.js';
 import { SongsModule } from '../songs/songs.module.js';
 import { GroupsController } from './groups.controller.js';
 import { GroupsService } from './groups.service.js';
-import { UserSchema } from '../users/schemas/user.schema.js';
+import { User, UserSchema } from '../users/schemas/user.schema.js';
 
 
 @Module({
