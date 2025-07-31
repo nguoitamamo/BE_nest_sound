@@ -7,9 +7,9 @@ import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 
 import { Types } from 'mongoose';
 import { Group, GroupDocument } from './schemas/group.schema.js';
-import { User } from '../decorators/customiz.js';
+
 import { Song, SongDocument } from '../songs/schemas/song.schema.js';
-import { UserDocument } from '../users/schemas/user.schema.js';
+import { User, UserDocument } from '../users/schemas/user.schema.js';
 import { CreateGroupDto } from './dto/create-group.dto.js';
 import { IUser } from '../users/users.interface.js';
 import { UpdateGroupDto } from './dto/update-group.dto.js';
