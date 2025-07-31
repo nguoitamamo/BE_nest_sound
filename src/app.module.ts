@@ -28,7 +28,7 @@ import { FilesModule } from './files/files.module.js';
 import { CommentsModule } from './comments/comments.module.js';
 import { PermissionsModule } from './permissions/permissions.module.js';
 import { RolesModule } from './roles/roles.module.js';
-import { DatabasesModule } from './databases/databases.module.js';
+
 import { GroupsModule } from './groups/groups.module.js';
 import { ChatsModule } from './chats/chats.module.js';
 import { MessagesModule } from './messages/messages.module.js';
@@ -50,10 +50,10 @@ AdminJS.registerAdapter({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         uri: configService.get<string>('MONGODB_URI'),
-         connectionFactory:  (connection) => {
-           connection.plugin(softDeletePlugin);
-          return  connection;
-        } 
+        connectionFactory: (connection) => {
+          connection.plugin(softDeletePlugin);
+          return connection;
+        }
 
       }),
       inject: [ConfigService],
@@ -76,7 +76,6 @@ AdminJS.registerAdapter({
     CommentsModule,
     PermissionsModule,
     RolesModule,
-    DatabasesModule,
     GroupsModule,
     ChatsModule,
     MessagesModule,
