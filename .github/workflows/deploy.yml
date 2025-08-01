@@ -36,7 +36,7 @@ jobs:
             source ~/.nvm/nvm.sh
             cd ~/BE_nest_sound
             git fetch --all
-            git reset --hard origin/main
+            git reset --hard origin/master
             echo "${{secrets.ENV_PRODUCTION}}" > .env
             npm i --force
             npx prisma generate
