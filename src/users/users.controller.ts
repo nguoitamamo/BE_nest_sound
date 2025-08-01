@@ -28,8 +28,8 @@ export class UsersController {
   @ResponseMessage('nâng cấp vip')
   @Patch('vip')
   handleUpdateVip(
-    @Query('vip') vip: string,
-    @Query('id') id: string,
+    @Query('vip') vip: string, //vip name
+    @Query('id') id: string, // id của user được update
     @User() user: IUser
   ) {
     return this.usersService.handleUpdateVip(user, id, vip)

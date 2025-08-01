@@ -9,6 +9,8 @@ export class AppController {
     private authService: AuthService
   ) { }
 
+
+
   // @Public()
   // @Post('upload/image')
   // @UseInterceptors(FileInterceptor('file'))
