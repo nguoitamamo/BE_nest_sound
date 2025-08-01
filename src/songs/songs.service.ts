@@ -228,46 +228,46 @@ export class SongsService {
 
 
 
-  async transcribeAudio(filePath: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      // const pythonFile = path.join(__dirname, '.', 'CheckAudio', 'transcribe.py');
-      const python = spawn('python', ['D:\\BE_Nestjs\\nestjs-basic\\src\\CheckAudio\\transcribe.py', filePath]);
+  // async transcribeAudio(filePath: string): Promise<boolean> {
+  //   return new Promise((resolve, reject) => {
+  //     // const pythonFile = path.join(__dirname, '.', 'CheckAudio', 'transcribe.py');
+  //     const python = spawn('python', ['D:\\BE_Nestjs\\nestjs-basic\\src\\CheckAudio\\transcribe.py', filePath]);
 
-      let result = '';
+  //     let result = '';
 
-      python.stdout.on('data', (data) => {
-        result += data.toString();
-      });
+  //     python.stdout.on('data', (data) => {
+  //       result += data.toString();
+  //     });
 
-      python.stderr.on('data', (data) => {
-        console.error('stderr:', data.toString());
-      });
+  //     python.stderr.on('data', (data) => {
+  //       console.error('stderr:', data.toString());
+  //     });
 
-      python.on('error', (err) => {
-        reject(err);
-      });
+  //     python.on('error', (err) => {
+  //       reject(err);
+  //     });
 
-      python.on('close', () => {
-        const output = result.trim();
-        resolve(output === 'True');
-      });
-    });
-  }
+  //     python.on('close', () => {
+  //       const output = result.trim();
+  //       resolve(output === 'True');
+  //     });
+  //   });
+  // }
 
 
-  async handleCheckAudio() {
-    const songs = await this.songModel.find({ state: 'confirm' });
-    for (const song of songs) {
-      console.log(">> check song after", song);
-      const filePath = path.join(__dirname, '..', '..', 'public', 'audio', song.audio);
-      console.log(filePath);
-      const hasTrue = await this.transcribeAudio(filePath);
-      if (hasTrue) {
-        await song.updateOne({ state: 'action' })
-        console.log(">> check song", song);
-      }
-    }
-  }
+  // async handleCheckAudio() {
+  //   const songs = await this.songModel.find({ state: 'confirm' });
+  //   for (const song of songs) {
+  //     console.log(">> check song after", song);
+  //     const filePath = path.join(__dirname, '..', '..', 'public', 'audio', song.audio);
+  //     console.log(filePath);
+  //     const hasTrue = await this.transcribeAudio(filePath);
+  //     if (hasTrue) {
+  //       await song.updateOne({ state: 'action' })
+  //       console.log(">> check song", song);
+  //     }
+  //   }
+  // }
 
 
 }
