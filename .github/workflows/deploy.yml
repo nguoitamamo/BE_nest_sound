@@ -2,9 +2,9 @@ name: Deploy BE Production
 
 on:
   push:
-    branches: ['main']
+    branches: ['master']
   pull_request:
-    branches: ['main']
+    branches: ['master']
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
           node-version: 16.20.2
           cache: 'npm'
       - name: Create .env file
-        run: echo "${{secrets.ENV_PRODUCTION}}" &gt; .env
+        run: echo "${{secrets.ENV_PRODUCTION}}" > .env
       - run: npm i --force
       - run: npm run build
   deploy:
@@ -37,7 +37,7 @@ jobs:
             cd ~/deploy-node-server
             git fetch --all
             git reset --hard origin/main
-            echo "${{secrets.ENV_PRODUCTION}}" &gt; .env
+            echo "${{secrets.ENV_PRODUCTION}}" > .env
             npm i --force
             npx prisma generate
             npm run build
