@@ -2,10 +2,13 @@
 /dist
 /node_modules
 package-lock.json
+
 /.github
 .env
 docker-compose.yaml
 Dockerfile
+
+
 # Logs
 logs
 *.log

@@ -17,7 +17,7 @@ import options from './admin/options.js';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
-import { CompaniesModule } from './companies/companies.module.js';
+
 import { SongsModule } from './songs/songs.module.js';
 import { GenresModule } from './genres/genres.module.js';
 import { AlbumsModule } from './albums/albums.module.js';
@@ -65,7 +65,6 @@ AdminJS.registerAdapter({
     ScheduleModule.forRoot(),
     UsersModule,
     AuthModule,
-    CompaniesModule,
     SongsModule,
     GenresModule,
     AlbumsModule,
