@@ -5,6 +5,7 @@ package-lock.json
 docker-compose.yaml
 Dockerfile
 .env
+/.github
 # Logs
 logs
 *.log
