@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, Types } from 'mongoose';
+import { Album } from '../../albums/schema/album.schema.js';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -33,6 +34,15 @@ export class User {
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Song' }] })
   shared: Types.ObjectId[]
+
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: User.name }], default: [] })
+  friend: Types.ObjectId[];
+
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: Album.name }] })
+  albums: Types.ObjectId[];
+
 
   @Prop()
   refreshToken: string;

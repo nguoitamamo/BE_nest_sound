@@ -26,8 +26,8 @@ export class Chat {
         messageID: Types.ObjectId
     }[];
 
-    @Prop({ default: '' })
-    lastMessageAt: string;
+    @Prop()
+    lastMessageAt: Date;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Message' })
     lastMessage: Types.ObjectId;

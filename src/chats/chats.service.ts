@@ -16,7 +16,7 @@ export class ChatsService {
     @InjectModel(Chat.name) private chatModel: SoftDeleteModel<ChatDocument>,
   ) { }
 
-  async create(createChatDto: CreateChatDto , user: IUser) {
+  async create(createChatDto: CreateChatDto, user: IUser) {
     const { users, isGroupChat } = createChatDto;
 
 

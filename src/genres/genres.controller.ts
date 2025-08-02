@@ -9,12 +9,13 @@ import { UpdateGenreDto } from './dto/update-genre.dto.js';
 export class GenresController {
   constructor(private readonly genresService: GenresService) { }
 
-  @Public()
+
   @Post()
   create(@Body() createGenreDto: CreateGenreDto) {
     return this.genresService.create(createGenreDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.genresService.findAll();

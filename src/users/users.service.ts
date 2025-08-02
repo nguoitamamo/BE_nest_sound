@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 
 import { InjectModel } from '@nestjs/mongoose';
 
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 // import { genSaltSync, hashSync, compareSync } from "bcryptjs";
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 
@@ -18,18 +18,20 @@ import { UpdateUserDto } from './dto/update-user.dto.js';
 
 
 import pkg from 'bcryptjs';
+
 const { genSaltSync, hashSync, compareSync } = pkg;
 
 
 @Injectable()
 export class UsersService {
-  
+
 
   constructor(
     @InjectModel(User.name) private userModel: SoftDeleteModel<UserDocument>,
 
-    @InjectModel(Role.name)
-    private roleModel: SoftDeleteModel<RoleDocument>,
+    @InjectModel(Role.name) private roleModel: SoftDeleteModel<RoleDocument>,
+
+
 
   ) { }
   // room
@@ -143,7 +145,7 @@ export class UsersService {
 
 
 
-  async handleUpdateVip(user: IUser, id: string, vip: string) {
+  async handleUpdateVipAdmin(user: IUser, id: string, vip: string,) {
     const vipRole = await this.roleModel.findOne({ name: vip });
     if (!vipRole) throw new Error("Role không tồn tại");
 
@@ -163,8 +165,48 @@ export class UsersService {
     );
   }
 
+  async handleUpdateVipUser(userId: string, userName: string, vip: string) {
+    const vipRole = await this.roleModel.findOne({ name: vip });
+    if (!vipRole) throw new Error("Role không tồn tại");
+
+    return await this.userModel.updateOne(
+      { _id: userId },
+      {
+        $addToSet: {
+          role: vipRole._id
+        },
+        $set: {
+          updateBy: {
+            _id: new Types.ObjectId(userId),
+            name: userName
+          }
+        }
+      }
+    );
+  }
+
+  async handleSubmitFriend(id: string, user: IUser) {
+    await this.userModel.updateOne(
+      { _id: user._id },
+      { $addToSet: { friend: new Types.ObjectId(id) } }
+    );
+
+    await this.userModel.updateOne(
+      { _id: id },
+      { $addToSet: { friend: new Types.ObjectId(user._id) } }
+    );
+
+    return true;
+  }
 
 
+  async handleGetAlbumByUser(id: string) {
+    const user = await this.userModel
+      .findById(id)
+      .populate('albums', '_id name description')
+
+    return user?.albums;
+  }
   async getAll() {
     return this.userModel.find().select('_id name avatar email createdAt updatedAt')
   }

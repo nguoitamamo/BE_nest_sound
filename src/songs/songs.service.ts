@@ -39,11 +39,13 @@ export class SongsService {
       cover: createSongDto.cover,
       state: createSongDto.state,
       isVip: createSongDto?.isVip || false,
+      albumID: createSongDto?.albumID || '',
       createBy: {
         _id: user._id,
         name: user.name
       }
     })
+
   }
 
 

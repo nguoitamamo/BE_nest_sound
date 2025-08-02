@@ -28,11 +28,11 @@ export class UsersController {
   @ResponseMessage('nâng cấp vip')
   @Patch('vip')
   handleUpdateVip(
-    @Query('vip') vip: string, //vip name
-    @Query('id') id: string, // id của user được update
+    @Query('vip') vip: string,
+    @Query('id') id: string, //vip name
     @User() user: IUser
   ) {
-    return this.usersService.handleUpdateVip(user, id, vip)
+    return this.usersService.handleUpdateVipAdmin(user,id, vip)
   }
 
   @Public()
@@ -75,6 +75,14 @@ export class UsersController {
   }
 
 
+  @Patch('friend/:id')
+  handleSubmitFriend(
+    @Param('id') id: string,// id của người được add friend
+    @User() user: IUser
+  ){
+    return this.usersService.handleSubmitFriend( id, user)
+  }
+
   // @SubscribeMessage('events')
   // handleEvent(@ConnectedSocket() client: Socket, @MessageBody() data: any): string {
   //   console.log(client.data);
@@ -82,6 +90,14 @@ export class UsersController {
   //   const message: string = data.message;
   //   return message;
   // }
+
+
+  @Get('album/:id')
+  handleGetAlbum(
+    @Param('id') id: string
+  ){
+    return this.usersService.handleGetAlbumByUser(id);
+  }
 
 
 

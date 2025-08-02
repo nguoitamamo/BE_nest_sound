@@ -49,6 +49,13 @@ export interface MessageType {
     updatedAt: string;
 }
 
+export interface SocketPapload {
+    text: string,
+    image: string,
+    socketMessageId: number,
+    chat: ChatType
+}
+
 interface UserType {
     _id: string;
     name: string;
@@ -74,8 +81,14 @@ export interface ChatType {
     updatedAt: string;
 }
 export interface ReadAllMessagePayload {
-  chatId: string;
-  users: string[];
-  readByUserId: string;
+    chatId: string;
+    users: string[];
+    readByUserId: string;
 }
 
+
+export interface UserInfoUpdateRole {
+    userId: string,
+    userName: string,
+    vipName: string
+}

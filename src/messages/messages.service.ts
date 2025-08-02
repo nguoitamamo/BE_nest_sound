@@ -50,6 +50,7 @@ export class MessagesService {
 
     return true;
 
+
   }
 
   findAll() {
@@ -63,9 +64,9 @@ export class MessagesService {
       .populate("sender", "_id name avatar email createdAt updatedAt")
       .sort({ createdAt: 1 });
 
-    if (messages.length === 0) {
-      throw new BadRequestException("Không tìm thấy tin nhắn nào trong đoạn chat này");
-    }
+    // if (messages.length === 0) {
+    //   throw new BadRequestException("Không tìm thấy tin nhắn nào trong đoạn chat này");
+    // }
 
     // const chatUsers = await messages[0].populate("chat", "users");
 

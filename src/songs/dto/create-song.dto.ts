@@ -67,4 +67,9 @@ export class CreateSongDto {
     @IsBoolean()
     isVip: boolean;
 
+
+    @IsOptional()
+    @IsString()
+    albumID: string;
+
 }

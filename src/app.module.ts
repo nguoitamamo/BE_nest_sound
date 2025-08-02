@@ -36,6 +36,9 @@ import { AppService } from './app.service.js';
 import { ChatGateway } from './chats/chats.gateway.js';
 import { JwtAuthGuard } from './auth/jwt-auth.guard.js';
 import { IsUniqueConstraint } from './validator/is.unique.constraint.js';
+import { PaymentsModule } from './payments/payments.module.js';
+
+
 
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
@@ -79,6 +82,7 @@ AdminJS.registerAdapter({
     ChatsModule,
     MessagesModule,
 
+
     AdminModule.createAdminAsync({
       useFactory: async () => {
         return await {
@@ -96,6 +100,8 @@ AdminJS.registerAdapter({
         };
       },
     }),
+
+    PaymentsModule,
 
 
 

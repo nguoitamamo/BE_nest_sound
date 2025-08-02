@@ -30,8 +30,8 @@ export class GenresService {
   findOneByName(genreName: string) {
     return this.genreModel.findOne({ name: genreName });
   }
-  findAll() {
-    return `This action returns all genres`;
+  async findAll() {
+    return this.genreModel.find().select('_id name descriptions')
   }
 
   findOne(id: number) {

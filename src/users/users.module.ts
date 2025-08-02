@@ -11,6 +11,7 @@ import { RolesService } from '../roles/roles.service.js';
 
 
 
+
 @Module({
   imports: [
     MongooseModule.forFeature([
@@ -19,6 +20,6 @@ import { RolesService } from '../roles/roles.service.js';
     ]),],
   controllers: [UsersController],
   providers: [UsersService, RolesService],
-  exports: [UsersService,]
+  exports: [UsersService]
 })
 export class UsersModule { }

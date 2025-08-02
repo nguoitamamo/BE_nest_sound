@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { StateEnum } from '../state.enumts/state.enum.js';
+import { Album } from '../../albums/schema/album.schema.js';
 
 
 
@@ -36,8 +37,8 @@ export class Song {
     @Prop()
     genres: string[];
 
-    @Prop()
-    albumID: string;
+    @Prop({ type: { type: Types.ObjectId, ref: Album.name } })
+    albumID: Types.ObjectId;
 
     @Prop()
     isVip: boolean;

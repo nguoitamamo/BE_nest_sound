@@ -23,9 +23,9 @@ export class AlbumsController {
     return this.albumsService.findAll();
   }
 
-  @Get(':id')
+  @Get(':id') // id của user
   findOne(@Param('id') id: string) {
-    return this.albumsService.findOne(+id);
+    return this.albumsService.findOne(id);
   }
 
   @Patch(':id')

@@ -15,9 +15,10 @@ import { Server, Socket } from 'socket.io'
 
 
 
-import { Types } from 'mongoose'
+
 import { ChatsService } from './chats.service.js'
-import { ClientToServerEvents, MessageType, ServerToClientEvents } from '../global/global.interface.js'
+import { ClientToServerEvents, MessageType, ServerToClientEvents, SocketPapload, UserInfoUpdateRole } from '../global/global.interface.js'
+import { UsersService } from '../users/users.service.js'
 
 
 
@@ -30,7 +31,8 @@ import { ClientToServerEvents, MessageType, ServerToClientEvents } from '../glob
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     constructor(
-        private chatService: ChatsService
+        private chatService: ChatsService,
+        private userService: UsersService
     ) { }
 
     @WebSocketServer() server: Server = new Server<ServerToClientEvents, ClientToServerEvents>()
@@ -89,13 +91,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @SubscribeMessage('send-new-message')
     async handleSendMessage(
         @MessageBody()
-        payload: {
-            message: MessageType
-        }
-    ) {
-        payload.message.chat.users.forEach((user) => {
-            this.server.to(user._id).emit("new-message-received", payload.message);
 
+        message: MessageType
+
+    ) {
+        message?.chat?.users.forEach((user) => {
+            if (user._id !== message.sender._id)
+                this.server.to(user._id).emit("new-message-received", message);
         });
     }
 
@@ -132,6 +134,23 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     //     });
     // }
 
+
+
+    @SubscribeMessage('update-role')
+    async handleUpdateRole(
+        @MessageBody()
+        payload: {
+            info: UserInfoUpdateRole
+        }
+    ) {
+        if (payload.info) {
+            await this.userService.handleUpdateVipUser(
+                payload.info.userId,
+                payload.info.userName,
+                payload.info.vipName,
+            )
+        }
+    }
 
 
 
