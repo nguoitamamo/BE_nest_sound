@@ -92,3 +92,14 @@ export interface UserInfoUpdateRole {
     userName: string,
     vipName: string
 }
+
+export interface InfoCallUser {
+    fromUserID: string,
+    ToUserID: string,
+    callerName: string;
+    callerAvatar: string;
+    receivedName: string;
+    receivedAvatar: string;
+    chatID: string;
+    socketID: string
+}

@@ -6,6 +6,7 @@ import {
     WebSocketServer,
     OnGatewayConnection,
     OnGatewayDisconnect,
+    ConnectedSocket,
 } from '@nestjs/websockets'
 import { Logger } from '@nestjs/common'
 
@@ -17,7 +18,7 @@ import { Server, Socket } from 'socket.io'
 
 
 import { ChatsService } from './chats.service.js'
-import { ClientToServerEvents, MessageType, ServerToClientEvents, SocketPapload, UserInfoUpdateRole } from '../global/global.interface.js'
+import { ClientToServerEvents, InfoCallUser, MessageType, ServerToClientEvents, SocketPapload, UserInfoUpdateRole } from '../global/global.interface.js'
 import { UsersService } from '../users/users.service.js'
 
 
@@ -152,6 +153,38 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
     }
 
+
+    @SubscribeMessage('call-user')
+    async handleCallUser(
+        @MessageBody()
+        info: InfoCallUser,
+
+    ) {
+        if (info) {
+            console.log(">> check", info)
+            this.server.to(info.ToUserID).emit("incoming-call", info)
+
+        }
+    }
+
+
+    @SubscribeMessage('reject-call')
+    async handleRejectCall(
+        @MessageBody()
+        info: InfoCallUser,
+
+    ) {
+        if (info) {
+            console.log(">> check reject", info)
+            this.server.to(info.fromUserID).emit("reject-call-user", false)
+        }
+    }
+
+
+    @SubscribeMessage('call-accepted')
+    handleCallAccepted(@MessageBody() info: InfoCallUser) {
+        this.server.to(info.fromUserID).emit('received-call-accepted', info);
+    }
 
 
     afterInit(server: Server) {
