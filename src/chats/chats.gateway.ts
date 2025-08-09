@@ -26,7 +26,7 @@ import { UsersService } from '../users/users.service.js'
 
 @WebSocketGateway({
     cors: {
-        origin: ['http://localhost:4000'],
+        origin: ['http://localhost:4000', 'http://160.25.81.159:4000'],
         credentials: true,
     },
 })
@@ -270,7 +270,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         des: string,
         amount: string
     ) {
-        
+
     }
 
 
