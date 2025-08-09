@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ChatsService } from './chats.service.js';
-import { ResponseMessage, User } from '../decorators/customiz.js';
+import { Public, ResponseMessage, User } from '../decorators/customiz.js';
 import { CreateChatDto } from './dto/create-chat.dto.js';
 import { IUser } from '../users/users.interface.js';
 import { UpdateChatDto } from './dto/update-chat.dto.js';
@@ -16,6 +16,14 @@ export class ChatsController {
     return this.chatsService.create(createChatDto, user);
   }
 
+
+  @Patch('addUser')
+  handleAddUser(
+    @Body('UserID') UserID: string,
+    @Body('ChatID') ChatID: string
+  ) {
+    return this.chatsService.handleUpdateUserChat(UserID, ChatID)
+  }
 
   // @Get()
   // findAll() {
@@ -46,4 +54,9 @@ export class ChatsController {
   remove(@Param('id') id: string) {
     return this.chatsService.remove(+id);
   }
+
+
+
+
+
 }

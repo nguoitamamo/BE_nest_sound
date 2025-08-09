@@ -39,7 +39,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() server: Server = new Server<ServerToClientEvents, ClientToServerEvents>()
 
     private logger = new Logger('ChatGateway')
-    private onlineUsers: string[] = []
+    private onlineUsers: string[] = [];
+    private userSocketMap: Map<string, string> = new Map();
 
 
     @SubscribeMessage('join')
@@ -57,7 +58,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
             if (!this.onlineUsers.includes(payload.userID)) {
                 this.onlineUsers.push(payload.userID);
             }
-            console.log('>>> check online', this.onlineUsers);
+
             this.onlineUsers.forEach((user) => {
                 this.server.to(user).emit("online-users-updated", this.onlineUsers);
             });
@@ -81,12 +82,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
     }
 
-    //       socket.on("send-new-message", (message) => {
-    //     message.chat.users.forEach((user) => {
-    //       io.to(user._id).emit("new-message-received", message);
-    //     });
-    //     console.log(message);
-    //   });
 
 
     @SubscribeMessage('send-new-message')
@@ -111,29 +106,12 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         }
     ) {
 
-        console.log("đã xem hết");
 
         this.chatService.UpdateUserAllReadAndLastMessage(payload.chatId, payload.readByUserId)
-        // payload.users.forEach((user) => {
 
-        //     this.server.to(user).emit("user-read-all-chat-messages", {
-        //         chatId: payload.chatId,
-        //         readByUserId: payload.readByUserId,
-        //     });
-        // });
     }
 
-    // @SubscribeMessage('typing')
-    // async handleTyping(
-    //     @MessageBody() payload: ReadAllMessagePayload
-    // ) {
-    //     payload.users.forEach((user) => {
-    //         this.server.to(user).emit("typing", {
-    //             chatId: payload.chatId,
-    //             readByUserId: payload.readByUserId,
-    //         });
-    //     });
-    // }
+
 
 
 
@@ -161,7 +139,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     ) {
         if (info) {
-            console.log(">> check", info)
             this.server.to(info.ToUserID).emit("incoming-call", info)
 
         }
@@ -175,7 +152,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     ) {
         if (info) {
-            console.log(">> check reject", info)
             this.server.to(info.fromUserID).emit("reject-call-user", false)
         }
     }
@@ -185,6 +161,121 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     handleCallAccepted(@MessageBody() info: InfoCallUser) {
         this.server.to(info.fromUserID).emit('received-call-accepted', info);
     }
+
+
+
+
+    // @SubscribeMessage('conn-signal')
+    // handleConnSignal(
+    //     @MessageBody()
+    //     data: {
+    //         signal: any,
+    //         toUserID: string
+    //     }
+    // ) {
+    //     console.log(data);
+    //     this.server.to(data.toUserID).emit('conn-signal', data);
+    // }
+
+    ///
+
+    @SubscribeMessage('create-new-zoom')
+    async handleCreateZoom(
+        @MessageBody() data: { zoomID: string; userID: string },
+        @ConnectedSocket() socket: Socket
+    ) {
+        const { zoomID, userID } = data;
+        this.userSocketMap.set(userID, socket.id);
+
+        console.log('>> check create new Zoom');
+
+        socket.join(zoomID); // dùng socket.join
+    }
+
+
+    @SubscribeMessage('join-zoom')
+    async handleJoinZoom(
+        @MessageBody() data: { userID: string; zoomID: string; chatID: string },
+        @ConnectedSocket() socket: Socket
+    ) {
+        const { userID, zoomID, chatID } = data;
+
+        console.log('>> check join zoom');
+
+        this.userSocketMap.set(userID, socket.id); // cập nhật socket map
+        socket.join(zoomID);
+
+        const chat = await this.chatService.handleUpdateUserChat(userID, chatID);
+        console.log(">>> check chat", chat)
+        //@ts-ignore
+        for (const user of chat) {
+            const otherUserID = user._id.toString();
+            if (otherUserID !== userID) {
+                const otherSocketID = this.userSocketMap.get(otherUserID);
+                console.log(">> check ortherSoket", otherSocketID);
+                if (otherSocketID) {
+                    this.server.to(otherSocketID).emit('conn-prepare', { connUserSocketId: socket.id });
+                }
+            }
+
+
+        }
+    }
+
+
+    @SubscribeMessage('conn-init')
+    handleConnInit(
+        @MessageBody() data: { connUserSocketId: string },
+        @ConnectedSocket() socket: Socket
+    ) {
+        console.log(">> conn-init từ user:", socket.id, "->", data.connUserSocketId);
+
+        const { connUserSocketId } = data;
+        this.server.to(connUserSocketId).emit('conn-init', {
+            connUserSocketId: socket.id,
+        });
+    }
+
+
+    @SubscribeMessage('conn-signal')
+    async handleConnSignal(
+        @MessageBody()
+        data: { signal: any; connUserSocketId: string },
+        @ConnectedSocket() socket: Socket
+    ) {
+        const { signal, connUserSocketId } = data;
+
+        // Truyền dữ liệu signal sang user đích
+        this.server.to(connUserSocketId).emit('conn-signal', {
+            signal,
+            connUserSocketId: socket.id,
+        });
+
+        console.log(`[conn-signal] Gửi từ ${socket.id} đến ${connUserSocketId}`);
+    }
+
+
+
+
+
+
+
+
+    ///
+
+
+    @SubscribeMessage('user-payment')
+    async handleUserPayment(
+        @MessageBody()
+        des: string,
+        amount: string
+    ) {
+        
+    }
+
+
+
+
 
 
     afterInit(server: Server) {
@@ -197,6 +288,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     async handleDisconnect(socket: Socket): Promise<void> {
 
-        this.logger.log(`Socket disconnected: ${socket.id}`)
+        for (const [userID, socketID] of this.userSocketMap.entries()) {
+            if (socketID === socket.id) {
+                this.userSocketMap.delete(userID);
+                break;
+            }
+        }
+
+        console.log("🚪 User disconnected:", socket.id);
     }
 }

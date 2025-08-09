@@ -46,9 +46,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         const targetEnpoint = request?.route?.path;
         const tartgetMethod = request?.method;
         const permission = user?.permission;
-
+        console.log(">> check perrmission", permission);
         const exit = (permission.find(tmp =>
             tmp.apiPath === targetEnpoint && tmp.method === tartgetMethod
+
         ))
 
         if (!exit) throw new ForbiddenException('Bạn không có quyền truy cập endpoint này')

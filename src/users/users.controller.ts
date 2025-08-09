@@ -32,7 +32,7 @@ export class UsersController {
     @Query('id') id: string, //vip name
     @User() user: IUser
   ) {
-    return this.usersService.handleUpdateVipAdmin(user,id, vip)
+    return this.usersService.handleUpdateVipAdmin(user, id, vip)
   }
 
   @Public()
@@ -79,8 +79,8 @@ export class UsersController {
   handleSubmitFriend(
     @Param('id') id: string,// id của người được add friend
     @User() user: IUser
-  ){
-    return this.usersService.handleSubmitFriend( id, user)
+  ) {
+    return this.usersService.handleSubmitFriend(id, user)
   }
 
   // @SubscribeMessage('events')
@@ -95,11 +95,16 @@ export class UsersController {
   @Get('album/:id')
   handleGetAlbum(
     @Param('id') id: string
-  ){
+  ) {
     return this.usersService.handleGetAlbumByUser(id);
   }
 
 
+
+  // @Cron(CronExpression.EVERY_MINUTE)
+  // handleCron() {
+  //   this.logger.debug('Chạy mỗi phút...');
+  // }
 
 
 }

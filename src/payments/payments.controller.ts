@@ -2,15 +2,19 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { PaymentsService } from './payments.service.js';
 import { CreatePaymentDto } from './dto/create-payment.dto.js';
 import { UpdatePaymentDto } from './dto/update-payment.dto.js';
+import { ResponseMessage, User } from '../decorators/customiz.js';
+import { IUser } from '../users/users.interface.js';
 
 
 @Controller('payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
+
+  @ResponseMessage('create payment')
   @Post()
-  create(@Body() createPaymentDto: CreatePaymentDto) {
-    return this.paymentsService.create(createPaymentDto);
+  create(@Body() createPaymentDto: CreatePaymentDto, @User() user: IUser) {
+    return this.paymentsService.create(createPaymentDto, user);
   }
 
   @Get()

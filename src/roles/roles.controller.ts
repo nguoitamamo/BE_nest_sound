@@ -21,9 +21,22 @@ export class RolesController {
     return this.rolesService.findAll();
   }
 
+  @Public()
+  @ResponseMessage('get permission by role name')
+  @Get('all/:VIPNAME')
+  handleGetRoleVIP(@Param('VIPNAME') VIPNAME: string) {
+    return this.rolesService.getRole(VIPNAME)
+  }
 
 
   @Public()
+  @ResponseMessage('get permission all')
+  @Get('allvip')
+  handleGetRoleVIPAll() {
+    return this.rolesService.getRoleAllVIP()
+  }
+
+
   @Get('permissions')
   @ResponseMessage("get permission by role")
   findOne(@Body('ids') ids: string[]) {

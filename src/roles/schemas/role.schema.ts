@@ -19,6 +19,9 @@ export class Role {
 
 
     @Prop()
+    money: string
+
+    @Prop()
     createdAt: Date;
 
     @Prop()

@@ -43,6 +43,26 @@ export class RolesService {
 
   }
 
+  async getRole(VIPNAME: string) {
+
+
+    return await this.roleModel.find({ name: VIPNAME }).populate({
+      path: 'permissions',
+      match: { isLook: true },
+      select: '_id name'
+    }).select('_id name permissions')
+  }
+  async getRoleAllVIP() {
+
+    const ids = [process.env.VIP1ID, process.env.VIP2ID, process.env.VIP3ID]
+    console.log(">> Checjk ids", ids);
+    return await this.roleModel.find({ _id: { $in: ids } }).populate({
+      path: 'permissions',
+      match: { isLook: true },
+      select: '_id name'
+    }).select('_id name permissions money')
+  }
+
   async update(id: string, updateRoleDto: UpdateRoleDto, user: IUser) {
 
     if (!mongoose.Types.ObjectId.isValid(id))

@@ -129,4 +129,21 @@ export class ChatsService {
   remove(id: number) {
     return `This action removes a #${id} chat`;
   }
+
+
+  async handleUpdateUserChat(userID: string, chatID: string) {
+    const updatedChat = await this.chatModel.findByIdAndUpdate(
+      chatID,
+      { $addToSet: { users: userID } },
+      { new: true, select: 'users' } // trả về document sau update
+    );
+
+    if (!updatedChat) {
+      throw new Error("Chat not found");
+    }
+
+    return updatedChat.users;
+  }
+
+
 }

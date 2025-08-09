@@ -16,6 +16,10 @@ export class Permission {
 
 
     @Prop()
+    isLook: boolean;
+
+
+    @Prop()
     createdAt: Date;
 
     @Prop()

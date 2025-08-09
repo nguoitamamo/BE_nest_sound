@@ -16,10 +16,10 @@ export class Payment {
     @Prop({ type: { type: Types.ObjectId, ref: 'User' } })
     user: Types.ObjectId;
 
-    @Prop()
-    date: Date;
+    @Prop({ default: Date.now })
+    date: Date
 
-    @Prop({default: ''})
+    @Prop({ default: '' })
     account_number: string;
 
     @Prop({ default: '' })
@@ -28,6 +28,12 @@ export class Payment {
 
     @Prop({ default: '' })
     bank_brand_name: string
+
+
+    @Prop()
+    transaction_date: string
+
+
 
 }
 
