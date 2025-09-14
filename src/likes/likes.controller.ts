@@ -11,15 +11,15 @@ export class LikesController {
   constructor(private readonly likesService: LikesService) { }
 
 
-  @ResponseMessage('create like/dislike')
+  @ResponseMessage('Thêm danh sách yêu thích thành công')
   @Post() // truyền vào status và _id
   create(@Body() createLikeDto: CreateLikeDto, @User() user: IUser) {
     return this.likesService.create(createLikeDto, user);
   }
 
   @Get()
-  findAll() {
-    return this.likesService.findAll();
+  findAll(@User() user: IUser) {
+    return this.likesService.findAllList(user);
   }
 
   // @Public()

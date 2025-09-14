@@ -29,8 +29,16 @@ export class LikesService {
     })
   }
 
-  findAll() {
-    return `This action returns all likes`;
+  async findAllList(user: IUser) {
+    return await this.likeModel.find({ "userID._id": user._id })
+      .populate({
+        path: 'songID',
+        select: '_id name audio cover like dislike totalListen',
+        populate: {
+          path: 'users',
+          select: '_id name'
+        }
+      }).sort({ createdAt: -1 });
   }
 
   // async find(id: string, userID : string) {

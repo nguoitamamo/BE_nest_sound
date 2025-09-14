@@ -39,6 +39,7 @@ import { IsUniqueConstraint } from './validator/is.unique.constraint.js';
 import { PaymentsModule } from './payments/payments.module.js';
 import { ZoomsModule } from './zooms/zooms.module.js';
 import { CallsModule } from './calls/calls.module.js';
+import { WhisperModule } from './whisper/whisper.module.js';
 
 
 
@@ -110,6 +111,8 @@ AdminJS.registerAdapter({
     ZoomsModule,
 
     CallsModule,
+
+    WhisperModule,
 
 
 

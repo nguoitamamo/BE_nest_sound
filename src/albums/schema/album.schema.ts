@@ -8,12 +8,8 @@ export class Album {
     @Prop()
     name: string
 
-    
     @Prop({ default: '' })
     description: string
-
-    
-
 
     @Prop()
     createdAt: Date;

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Query, Logger } from '@nestjs/common';
 
 
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -7,6 +7,7 @@ import { Public, ResponseMessage, User } from '../decorators/customiz.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { IUser } from './users.interface.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 
 
@@ -101,10 +102,6 @@ export class UsersController {
 
 
 
-  // @Cron(CronExpression.EVERY_MINUTE)
-  // handleCron() {
-  //   this.logger.debug('Chạy mỗi phút...');
-  // }
 
 
 }

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose"
-import mongoose, { HydratedDocument } from "mongoose";
+import mongoose, { HydratedDocument, Types } from "mongoose";
 import { UserClass } from "../../users/user.class.ts/user.class.js";
 
 
@@ -12,7 +12,7 @@ export class Like {
     @Prop({ type: Object })
     userID: UserClass
 
-    @Prop()
+    @Prop({ type: [{ type: Types.ObjectId, ref: 'Song', required: true }] })
     songID: string
 
     @Prop()

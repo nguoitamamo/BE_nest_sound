@@ -6,6 +6,7 @@ import { UsersModule } from '../users/users.module.js';
 import { GenresModule } from '../genres/genres.module.js';
 import { SongsController } from './songs.controller.js';
 import { SongsService } from './songs.service.js';
+import { WhisperService } from '../whisper/whisper.service.js';
 
 
 
@@ -13,7 +14,7 @@ import { SongsService } from './songs.service.js';
 @Module({
   imports: [MongooseModule.forFeature([{ name: Song.name, schema: SongSchema }]), UsersModule, GenresModule],
   controllers: [SongsController],
-  providers: [SongsService,],
+  providers: [SongsService, WhisperService],
   exports: [SongsService,]
 })
 export class SongsModule { }

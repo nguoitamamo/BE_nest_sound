@@ -11,6 +11,10 @@ import { GenresService } from '../genres/genres.service.js';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { CreateSongDto } from './dto/create-song.dto.js';
 import { IUser } from '../users/users.interface.js';
+import { OpenAI } from 'openai';
+import * as fs from 'fs';
+import * as path from 'path';
+import { WhisperService } from '../whisper/whisper.service.js';
 
 
 @Injectable()
@@ -20,6 +24,7 @@ export class SongsService {
     @InjectModel(Song.name) private songModel: SoftDeleteModel<SongDocument>,
     private userService: UsersService,
     private genreService: GenresService,
+    private whisperService: WhisperService
   ) { }
 
   async create(createSongDto: CreateSongDto, user: IUser) {
@@ -256,19 +261,19 @@ export class SongsService {
   // }
 
 
-  // async handleCheckAudio() {
-  //   const songs = await this.songModel.find({ state: 'confirm' });
-  //   for (const song of songs) {
-  //     console.log(">> check song after", song);
-  //     const filePath = path.join(__dirname, '..', '..', 'public', 'audio', song.audio);
-  //     console.log(filePath);
-  //     const hasTrue = await this.transcribeAudio(filePath);
-  //     if (hasTrue) {
-  //       await song.updateOne({ state: 'action' })
-  //       console.log(">> check song", song);
-  //     }
-  //   }
-  // }
+  async handleCheckAudio() {
+    const songs = await this.songModel.find({ state: 'confirm' });
+    for (const song of songs) {
+      console.log(">> check song after", song);
+      const filePath = path.join(__dirname, '..', '..', 'public', 'audio', song.audio);
+      console.log(filePath);
+      const hasTrue = await this.whisperService.checkFile(filePath);
+      if (hasTrue) {
+        await song.updateOne({ state: 'action' })
+        console.log(">> check song", song);
+      }
+    }
+  }
 
 
 }

@@ -8,7 +8,6 @@ export type UserDocument = HydratedDocument<User>;
 @Schema({ timestamps: true })
 export class User {
 
-
   @Prop({ unique: true })
   name: string;
 
@@ -17,7 +16,6 @@ export class User {
 
   @Prop()
   password: string;
-
 
   @Prop()
   avatar: string;
@@ -31,21 +29,15 @@ export class User {
   @Prop({ type: [{ type: Types.ObjectId, ref: User.name }], default: [] })
   role: Types.ObjectId[];
 
-
   @Prop({ type: [{ type: Types.ObjectId, ref: 'Song' }] })
   shared: Types.ObjectId[]
-
 
   @Prop({ type: [{ type: Types.ObjectId, ref: User.name }], default: [] })
   friend: Types.ObjectId[];
 
-
   @Prop({ type: [{ type: Types.ObjectId, ref: Album.name }] })
   albums: Types.ObjectId[];
 
-
-  @Prop()
-  refreshToken: string;
 
   @Prop({ default: 'SYSTEM' })
   typeLogin: string;

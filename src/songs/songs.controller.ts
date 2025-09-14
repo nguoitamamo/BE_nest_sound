@@ -32,7 +32,7 @@ export class SongsController {
 
 
 
-  @Patch('updateview/:id') // id của bài hát
+  @Patch('updateview/:id')
   @ResponseMessage('update view')
   updateView(@User() user: IUser, @Param('id') id: string) {
     return this.songsService.UpdateView(user, id);
@@ -105,13 +105,11 @@ export class SongsController {
   }
 
 
-  // @Cron(CronExpression.EVERY_5_MINUTES)
-  // handleCron() {
-
-  //   // chjay khi 0h hàng ngày
-  //   console.log("đã chạy vào lúc 10s");
-  //   return this.songsService.handleCheckAudio();
-  // }
+  @Cron(CronExpression.EVERY_5_MINUTES)
+  handleCron() {
+    console.log("đã chạy vào lúc 10s");
+    return this.songsService.handleCheckAudio();
+  }
 
 
 }
